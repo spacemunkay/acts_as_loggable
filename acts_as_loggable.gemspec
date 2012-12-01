@@ -2,7 +2,7 @@ Gem::Specification.new do |s|
   s.name = "acts_as_loggable"
   s.homepage = "http://github.com/spacemunkay/acts_as_loggable"
   s.license = "MIT"
-  s.version  = "0.0.2"
+  s.version  = "0.0.3"
   s.date     = "2012-12-01"
   s.summary = %Q{Make any actions performed on a model logged. Rails 3+ only}
   s.email = "jasondenney@gmail.com"
