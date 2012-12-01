@@ -17,9 +17,9 @@ Jeweler::Tasks.new do |gem|
   gem.name = "acts_as_loggable"
   gem.homepage = "http://github.com/spacemunkay/acts_as_loggable"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
-  gem.email = "jdenney@lgscout.com"
+  gem.summary = %Q{Make any actions performed on a model logged.}
+  gem.description = %Q{Make any actions performed on a model logged.}
+  gem.email = "jasondenney@gmail.com"
   gem.authors = ["Jason Denney"]
   # dependencies defined in Gemfile
 end
