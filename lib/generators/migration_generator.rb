@@ -4,8 +4,9 @@ require 'rails/generators/migration'
 module ActsAsLoggable
   class MigrationGenerator < Rails::Generators::Base
     include Rails::Generators::Migration
-
-    desc "Generates migration for Log models"
+    @@num_migrations = 1
+    argument :loggable_models, :type => :array, :default => [], :banner => "modelname1 modelname2"
+    desc "Generates migration for the Log models"
 
     def self.orm
       Rails::Generators.options[:rails][:orm]
@@ -22,7 +23,8 @@ module ActsAsLoggable
     def self.next_migration_number(dirname)
       if ActiveRecord::Base.timestamped_migrations
         migration_number = Time.now.utc.strftime("%Y%m%d%H%M%S").to_i
-        migration_number += 1
+        migration_number += @@num_migrations
+        @@num_migrations += 1
         migration_number.to_s
       else
         "%.3d" % (current_migration_number(dirname) + 1)
@@ -32,6 +34,11 @@ module ActsAsLoggable
     def create_migration_file
       if self.class.orm_has_migration?
         migration_template 'migration.rb', 'db/migrate/acts_as_loggable_migration'
+        
+        loggable_models.each do |model|
+          @model = model
+          migration_template 'actions_migration.rb', "db/migrate/acts_as_loggable_#{@model}_actions_migration", @model
+        end
       end
     end
   end
