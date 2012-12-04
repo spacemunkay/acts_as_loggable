@@ -9,6 +9,9 @@ module ActsAsLoggable
         #ActiveRecord::Base.send :include, ActsAsLoggableOn::Logger
       end
     end
+    generators do
+      require 'generators/migration_generator'
+    end
   end
 end
 

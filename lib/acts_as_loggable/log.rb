@@ -1,5 +1,5 @@
 module ActsAsLoggable
-  class Tag < ::ActiveRecord::Base
+  class Log < ::ActiveRecord::Base
     belongs_to :loggable, :polymorphic => true
 
     attr_accessible :description
