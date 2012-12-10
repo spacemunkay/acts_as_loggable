@@ -2,7 +2,7 @@ module ActsAsLoggable
   class Log < ::ActiveRecord::Base
     belongs_to :loggable, :polymorphic => true
 
-    attr_accessible :description
+    attr_accessible :description, :action_id
 
     ### ASSOCIATIONS:
 
