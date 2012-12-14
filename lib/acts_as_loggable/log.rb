@@ -2,7 +2,8 @@ module ActsAsLoggable
   class Log < ::ActiveRecord::Base
     belongs_to :loggable, :polymorphic => true
 
-    attr_accessible :start_date, :end_date, :description, :action_id
+    attr_accessible :loggable_type, :loggable_id, :logger_type, :logger_id, :context,
+                    :start_date, :end_date, :description, :action_id
 
     ### ASSOCIATIONS:
 
