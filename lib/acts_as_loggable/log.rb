@@ -19,5 +19,9 @@ module ActsAsLoggable
     def action
       "ActsAsLoggable::#{self.loggable_type}Action".constantize.find_by_id(self.action_id)
     end
+
+    def loggable_path
+      "/#{self.loggable_type.pluralize.downcase}/#{self.loggable_id}/logs"
+    end
   end
 end
