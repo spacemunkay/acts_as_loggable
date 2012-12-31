@@ -32,7 +32,7 @@ module ActsAsLoggable
     scope :sort_by_duration, lambda { |direction| order("(julianday(end_date) - julianday(start_date)) #{direction}") }
     
     def check_copy_log
-      if self.copy_log == true
+      if self.copy_log == true or self.copy_log == "on" #needed to check for on because of extJS fieldsets
         log_copy = self.dup
         log_copy.update_attributes( { :loggable_type => self.copy_type,
                                       :loggable_id => self.copy_id,
