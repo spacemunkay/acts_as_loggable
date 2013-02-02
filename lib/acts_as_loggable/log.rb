@@ -7,6 +7,7 @@ module ActsAsLoggable
     #quickfix for Netzke
     belongs_to :user_action, :foreign_key => 'log_action_id'
     belongs_to :bike_action, :foreign_key => 'log_action_id'
+    belongs_to :transaction_action, :foreign_key => 'log_action_id'
 
     attr_accessible :loggable_type, :loggable_id, :logger_type, :logger_id, :context,
                     :start_date, :end_date, :description, :log_action_id, :log_action_type,
