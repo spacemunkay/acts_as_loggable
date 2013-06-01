@@ -29,9 +29,11 @@ module ActsAsLoggable
     validates_presence_of :start_date
     validates_presence_of :end_date
     validates_length_of :description, :maximum => 255
-    
+    validate :end_date_cannot_be_set_without_start_date
+    validate :end_date_cannot_be_before_start_date
+
     scope :sort_by_duration, lambda { |direction| order("(julianday(end_date) - julianday(start_date)) #{direction}") }
-    
+
     def check_copy_log
       if self.copy_log == true or self.copy_log == "on" #needed to check for on because of extJS fieldsets
         log_copy = self.dup
@@ -50,6 +52,18 @@ module ActsAsLoggable
 
     def loggable_path
       "/#{self.loggable_type.pluralize.downcase}/#{self.loggable_id}/logs"
+    end
+
+    def end_date_cannot_be_set_without_start_date
+      if end_date && !start_date
+        errors.add(:end_date, "can't be set without a start_date")
+      end
+    end
+
+    def end_date_cannot_be_before_start_date
+      if end_date && start_date && end_date < start_date
+        errors.add(:end_date, "can't be before start_date")
+      end
     end
   end
 end
