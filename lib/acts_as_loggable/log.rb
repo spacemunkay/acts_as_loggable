@@ -17,6 +17,7 @@ module ActsAsLoggable
     attr_accessor :copy_log, :copy_type, :copy_id, :copy_action_id, :copy_action_type
 
     #provide a convenience copy ability
+    before_validation :set_end_date_if_nil
     before_save :check_copy_log
 
     ### ASSOCIATIONS:
@@ -52,6 +53,14 @@ module ActsAsLoggable
 
     def loggable_path
       "/#{self.loggable_type.pluralize.downcase}/#{self.loggable_id}/logs"
+    end
+
+    def set_end_date_if_nil
+
+      if !end_date
+        self.end_date = self.start_date
+      end
+
     end
 
     def end_date_cannot_be_set_without_start_date
